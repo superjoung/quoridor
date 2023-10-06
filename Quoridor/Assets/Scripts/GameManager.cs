@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
     public bool CheckStuck()
     {
         bool[] visited = new bool[81];
-        int playerGraphPosition = (int)((playerPosition.x + 4) * 9 + playerPosition.y + 4);
-        int enemyGraphPosition = (int)((enemyPosition.x + 4) * 9 + enemyPosition.y + 4);
+        int playerGraphPosition = (int)((playerPosition.y + 4) * 9 + playerPosition.x + 4);
+        int enemyGraphPosition = (int)((enemyPosition.y + 4) * 9 + enemyPosition.x + 4);
         void DFS(int now)
         {
             visited[now] = true;
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         string log = "";
         for (int i = 0; i < mapGraph.GetLength(0); i++)
         {
-            for (int row = 0; row < 9; row++)
+            for (int row = 8; row >= 0; row--)
             {
                 string rowInfo = "";
                 for (int col = 0; col < 9; col++)

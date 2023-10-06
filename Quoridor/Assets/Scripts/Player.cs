@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
                 gameManager.mapGraph = (int[,])tempMapGraph.Clone(); // 맵 그래프 원상태로
                 if (wallInfo[2] == 0) // 세로 벽이면
                 {
-                    int wallGraphPosition = (wallInfo[0] + 4) * 9 + wallInfo[1] + 4; // 벽좌표를 그래프좌표로 변환
+                    int wallGraphPosition = (wallInfo[1] + 4) * 9 + wallInfo[0] + 4; // 벽좌표를 그래프좌표로 변환
                     // 벽 넘어로 못넘어가게 그래프에서 설정
                     gameManager.mapGraph[wallGraphPosition, wallGraphPosition + 1] = 0;
                     gameManager.mapGraph[wallGraphPosition + 1, wallGraphPosition] = 0;
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
                 }
                 if (wallInfo[2] == 1) // 가로 벽이면
                 {
-                    int wallGraphPosition = (wallInfo[0] + 4) * 9 + wallInfo[1] + 4;// 벽좌표를 그래프좌표로 변환
+                    int wallGraphPosition = (wallInfo[1] + 4) * 9 + wallInfo[0] + 4;// 벽좌표를 그래프좌표로 변환
                     // 벽 넘어로 못넘어가게 그래프에서 설정
                     gameManager.mapGraph[wallGraphPosition, wallGraphPosition + 9] = 0;
                     gameManager.mapGraph[wallGraphPosition + 9, wallGraphPosition] = 0;
