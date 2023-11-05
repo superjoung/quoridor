@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     GameObject playerWallPreview;
     [SerializeField]
     GameObject playerWallPrefab; // 플레이어 설치벽
+    [SerializeField]
+    GameObject historyIndexPrefab; // history 형식으로 저장되는 글 양식
 
     public int playerOrder = 1; // 플레이어 차례
 
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour
                 if (!playerWallPreview.GetComponent<PreviewWall>().isBlock && playerWallPreview.tag != "CantBuild" && playerWallPreview.activeInHierarchy) //갇혀있거나 겹쳐있거나 비활성화 되어있지않다면
                 {
                     Instantiate(playerWallPrefab, playerWallPreview.transform.position, playerWallPreview.transform.rotation); // 벽설치
+                    Debug.Log(playerWallPreview.transform.rotation);
+                    //UiManager.InputPlayerWallHistory(playerWallPreview.transform.position, playerWallPreview.transform.rotation, historyIndexPrefab); // history wall 저장
                     gameManager.playerPosition = transform.position / GameManager.gridSize;
                     tempMapGraph = (int[,])gameManager.mapGraph.Clone(); // 맵정보 새로저장
                     GameManager.Turn++; // 턴 넘기기
@@ -65,7 +69,9 @@ public class Player : MonoBehaviour
                 if (hit == false) return;
                 if (hit.transform.CompareTag("PlayerPreview")) // 클릭좌표에 플레이어미리보기가 있다면
                 {
+                    Debug.Log(hit.transform.position);
                     transform.position = hit.transform.position; //플레이어 위치 이동
+                    UiManager.InputPlayerMoveHistory(gameManager.playerPosition, transform.position / GameManager.gridSize, historyIndexPrefab); // history move 저장
                     gameManager.playerPosition = transform.position / GameManager.gridSize; //플레이어 위치정보 저장
                     GameManager.Turn++; // 턴 넘기기
                     return;

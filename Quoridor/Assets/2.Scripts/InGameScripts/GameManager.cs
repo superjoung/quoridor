@@ -46,7 +46,9 @@ public class GameManager : MonoBehaviour
         }
         // DebugMap();
         player = Instantiate(playerPrefab, playerPosition * gridSize, Quaternion.identity);
+
         int enemyCost = currentStage + 2;
+
         while(enemyCost != 0){
             int randomNumber = Random.Range(0, enemyPrefabs.Count);
             int cost = enemyPrefabs[randomNumber].GetComponent<Enemy>().cost;
@@ -63,16 +65,6 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (Turn % 2 == 0)
-        {
-            StartCoroutine(UiManager.EnemyPanelPop());
-        }
-
-        if (Turn % 2 == 1)
-        {
-            StartCoroutine(UiManager.PlayerPanelPop());
-        }
-
         if (Turn % 2 == 0 && Input.GetKey(KeyCode.Space)) //[디버그용] space 키를 통해 적턴 넘기기
         {
             Turn++;
